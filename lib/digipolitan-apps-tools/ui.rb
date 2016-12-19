@@ -2,20 +2,28 @@ module Digipolitan
 
   class UI
 
-    def self.input(message)
-      puts "#{message}\n"
-      return gets.strip()
+    def self.message(msg)
+      $stdout.puts("#{msg}\n")
     end
 
-    def self.confirm(message)
-      puts "#{message} y/n\n"
-      while data = getc
+    def self.input(msg)
+      self.message(msg)
+      return $stdin.gets().strip()
+    end
+
+    def self.error(msg)
+      self.message("\n[!] ERROR : #{msg}")
+    end
+
+    def self.confirm(msg)
+      self.message("#{msg} y/n")
+      while data = $stdin.getc()
         if data == "y"
           return true
         elsif data == "n"
           return false
         else
-          puts "\nYou must select only y/n\n"
+          self.error("Select y/n only")
         end
       end
     end
