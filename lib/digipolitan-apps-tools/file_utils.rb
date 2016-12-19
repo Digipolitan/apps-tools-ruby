@@ -2,7 +2,7 @@ module Digipolitan
 
   class FileUtils
 
-    def rename_files(pattern, replacement, path = ".", recursive = true)
+    def self.rename_files(pattern, replacement, path = ".", recursive = true)
       if pattern == nil || replacement == nil
         abort "Missing required parameters (pattern, replacement)"
       end
@@ -24,7 +24,7 @@ module Digipolitan
     end
   end
 
-  def replace_contents_of_files(pattern, replacement, path = ".", recursive = true)
+  def self.replace_contents_of_files(pattern, replacement, path = ".", recursive = true)
     if pattern == nil || replacement == nil
       abort "Missing required parameters (pattern, replacement)"
     end
@@ -44,7 +44,7 @@ module Digipolitan
     end
   end
 
-  def write_to_file(path, content = "")
+  def self.write_to_file(path, content = "")
     File.open(path, "w") { |file|
       file.puts(content)
     }
