@@ -28,6 +28,10 @@ module Digipolitan
       end
     end
 
+    def self.crash(msg)
+      abort("\n[!!!] CRASH : #{msg}\n")
+    end
+
   end
 
 end
