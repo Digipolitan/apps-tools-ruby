@@ -17,10 +17,10 @@ module Digipolitan
 
     def self.confirm(msg)
       self.message("#{msg} y/n")
-      while data = $stdin.getc()
-        if data == "y"
+      while c = $stdin.getch()
+        if c == "y"
           return true
-        elsif data == "n"
+        elsif c == "n"
           return false
         else
           self.error("Select y/n only")
