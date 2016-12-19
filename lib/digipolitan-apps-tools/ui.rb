@@ -28,6 +28,20 @@ module Digipolitan
       end
     end
 
+    def self.select(msg, values)
+      self.message(msg)
+      i = 0
+      values.each { |value|
+        i += 1
+        self.message("#{i} - #{value}")
+      }
+      while val = self.input("Select a value between [1 - #{i}]").to_i
+        if val >= 1 && val <= i
+          return values[val-1]
+        end
+      end
+    end
+
     def self.crash(msg)
       abort("\n[!!!] CRASH : #{msg}\n")
     end
