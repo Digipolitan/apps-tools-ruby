@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name                  = 'Digipolitan Apps Tools'
+  s.name                  = 'digipolitan-apps-tools'
   s.version               = '0.0.1'
   s.date                  = '2016-12-19'
   s.summary               = 'Digipolitan Ruby tools for apps'
