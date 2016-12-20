@@ -1,18 +1,30 @@
+require 'json'
+
 module Digipolitan
 
   class Fastlane
 
     def self.init()
-      app_identifier = Digipolitan::UI.input("App identifier ?")
-      apple_id = Digipolitan::UI.input("Apple ID ?")
-      team_name = Digipolitan::UI.input("Team name ?")
-      self.update_app_identifier(app_identifier)
-      self.app_init(app_identifier, apple_id, team_name)
-      if Digipolitan::UI.confirm("Init deliver ?")
-        self.deliver_init()
+      app_identifier = nil
+      if Digipolitan::UI.confirm("Would you like to update your app_identifier")
+        app_identifier = Digipolitan::UI.input("App identifier ?")
+        Digipolitan::Fastlane.update_app_identifier(app_identifier)
       end
-      if Digipolitan::UI.confirm("Init snapshot ?")
-        self.snapshot_init()
+      apple_id = nil
+      team_name = nil
+      if Digipolitan::UI.confirm("Init fastlane ?")
+        if app_identifier == nil
+          app_identifier = Digipolitan::UI.input("App identifier ?")
+        end
+        apple_id = Digipolitan::UI.input("Apple ID ?")
+        team_name = Digipolitan::UI.input("Team name ?")
+        Digipolitan::Fastlane.app_init(app_identifier, apple_id, team_name)
+        if Digipolitan::UI.confirm("Init deliver ?")
+          Digipolitan::Fastlane.deviler_init(app_identifier, apple_id)
+        end
+        if Digipolitan::UI.confirm("Init snapshot ?")
+          Digipolitan::Fastlane.snapshot_init()
+        end
       end
     end
 
@@ -45,7 +57,7 @@ module Digipolitan
       Digipolitan::FileUtils.write_to_file("fastlane/Appfile", app_file_data)
     end
 
-    def self.deviler_init()
+    def self.deviler_init(app_identifier, apple_id)
       deliver_file_data = "app_identifier \"#{app_identifier}\" # The bundle identifier of your app\nusername \"#{apple_id}\" # Your Apple email address"
       Digipolitan::FileUtils.write_to_file("fastlane/Deliverfile", deliver_file_data)
       age_ratings = {
