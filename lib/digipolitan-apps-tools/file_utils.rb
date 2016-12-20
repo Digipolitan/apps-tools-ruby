@@ -7,7 +7,7 @@ module Digipolitan
       entries.each do |entry|
         replaced = entry
         replaced_path = File.join(path, entry)
-        if replaced_path != __FILE__ && (ignored_entries == nil || ignored_entries[entry] == nil)
+        if replaced_path != __FILE__ && (ignored_entries == nil || ignored_entries.index(entry) == nil)
           if entry.include?(pattern)
             replaced = entry.gsub(pattern, replacement)
             replaced_path = File.join(path, replaced)
@@ -24,7 +24,7 @@ module Digipolitan
       entries = Dir.entries(path)
       entries.each do |entry|
         file_path = File.join(path, entry)
-        if file_path != __FILE__ && (ignored_entries == nil || ignored_entries[entry] == nil)
+        if file_path != __FILE__ && (ignored_entries == nil || ignored_entries.index(entry) == nil)
           if recursive && File.directory?(file_path) && entry != "." && entry != ".."
             self.replace_contents_of_files(pattern, replacement, file_path, recursive)
           elsif File.file?(file_path)
