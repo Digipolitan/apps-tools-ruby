@@ -1,6 +1,3 @@
-require 'ui'
-require 'file_utils'
-
 module Digipolitan
 
   class Xcodeproj
@@ -13,11 +10,11 @@ module Digipolitan
       project_name = File.basename(project, ".xcodeproj")
       app_name = Digipolitan::UI.input("Project name ?")
 
-      if UI.confirm("Are you sure to update the current project to '#{app_name}' ?")
-        UI.message("Starting replacement...")
-        FileUtils.rename_files(project_name, app_name)
-        FileUtils.replace_contents_of_files(project_name, app_name)
-        UI.message("Successfully replace '#{project_name}' with '#{app_name}'")
+      if Digipolitan::UI.confirm("Are you sure to update the current project to '#{app_name}' ?")
+        Digipolitan::UI.message("Starting replacement...")
+        Digipolitan::FileUtils.rename_files(project_name, app_name)
+        Digipolitan::FileUtils.replace_contents_of_files(project_name, app_name)
+        Digipolitan::UI.message("Successfully replace '#{project_name}' with '#{app_name}'")
       end
     end
 
@@ -33,6 +30,6 @@ module Digipolitan
         return File.join(File.basename(project, ".xcodeproj"), plist_name)
       end
     end
-
+    
   end
 end

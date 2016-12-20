@@ -1,15 +1,11 @@
-require 'ui'
-require 'file_utils'
-require 'xcodeproj'
-
 module Digipolitan
 
   class Fastlane
 
     def self.init()
-      app_identifier = UI.input("App identifier ?")
-      apple_id = UI.input("Apple ID ?")
-      team_name = UI.input("Team name ?")
+      app_identifier = Digipolitan::UI.input("App identifier ?")
+      apple_id = Digipolitan::UI.input("Apple ID ?")
+      team_name = Digipolitan::UI.input("Team name ?")
       self.update_app_identifier(app_identifier)
       self.app_init(app_identifier, apple_id, team_name)
       self.deliver_init()
@@ -18,16 +14,16 @@ module Digipolitan
 
     def self.update_app_identifier(app_identifier, project = nil, plist_path = nil)
       if project == nil
-        project = Xcodeproj.get_project()
+        project = Digipolitan::Xcodeproj.get_project()
       end
 
       if plist_path == nil
-        plist_path = Xcodeproj.get_info_plist(project)
+        plist_path = Digipolitan::Xcodeproj.get_info_plist(project)
       end
       begin
         system("fastlane run update_app_identifier app_identifier:#{app_identifier} plist_path:#{plist_path}")
       rescue
-        UI.error("Error during fastlane 'update_app_identifier'")
+        Digipolitan::UI.error("Error during fastlane 'update_app_identifier'")
       end
     end
 
@@ -42,7 +38,7 @@ module Digipolitan
       if team_name.length() > 0
         app_file_data += "team_name \"#{team_name}\"\n"
       end
-      FileUtils.write_to_file("fastlane/Appfile", app_file_data)
+      Digipolitan::FileUtils.write_to_file("fastlane/Appfile", app_file_data)
     end
 
     def self.deviler_init()
