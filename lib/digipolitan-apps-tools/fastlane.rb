@@ -19,10 +19,11 @@ module Digipolitan
         apple_id = Digipolitan::UI.input("Apple ID ?")
         team_name = Digipolitan::UI.input("Team name ?")
         Digipolitan::Fastlane.app_init(app_identifier, apple_id, team_name)
-        if Digipolitan::UI.confirm("Init deliver ?")
-          Digipolitan::Fastlane.deviler_init(app_identifier, apple_id)
+        if Digipolitan::UI.confirm("Init pilot (Use for beta testing) ?")
+          Digipolitan::Fastlane.pilot_init()
         end
-        if Digipolitan::UI.confirm("Init snapshot ?")
+        if Digipolitan::UI.confirm("Init deliver (Use for appstore submission) ?")
+          Digipolitan::Fastlane.deviler_init(app_identifier, apple_id)
           Digipolitan::Fastlane.snapshot_init()
         end
       end
@@ -46,7 +47,7 @@ module Digipolitan
     def self.app_init(app_identifier, apple_id, team_name)
       app_file_data = ""
       if app_identifier.length() > 0
-        app_file_data += "app_identifier #{app_identifier}\" # The bundle identifier of your app\n"
+        app_file_data += "app_identifier \"#{app_identifier}\" # The bundle identifier of your app\n"
       end
       if apple_id.length() > 0
         app_file_data += "apple_id \"#{apple_id}\" # Your Apple email address\n"
@@ -92,6 +93,9 @@ module Digipolitan
         end
       end
       print age_ratings.to_json
+    end
+
+    def self.pilot_init()
     end
 
     def self.snapshot_init()
