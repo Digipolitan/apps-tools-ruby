@@ -47,5 +47,4 @@ module Digipolitan
     end
 
   end
-
 end
