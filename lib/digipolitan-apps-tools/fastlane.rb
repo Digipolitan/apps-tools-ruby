@@ -101,9 +101,5 @@ module Digipolitan
     def self.snapshot_init()
     end
 
-    def self.run_action() {
-
-    }
-
   end
 end
