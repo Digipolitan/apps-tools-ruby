@@ -1,3 +1,5 @@
+require 'json'
+
 module Digipolitan
 
   class FileUtils
@@ -41,6 +43,17 @@ module Digipolitan
       File.open(path, "w") { |file|
         file.puts(content)
       }
+    end
+
+    def self.parse_json_from_file(path)
+      if data = File.read(path)
+        return JSON.parse(data)
+      end
+      return nil
+    end
+
+    def self.serialize_json_to_file(path, json_object)
+      self.write_to_file(path, json_object.to_json)
     end
 
   end

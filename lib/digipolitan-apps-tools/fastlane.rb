@@ -61,44 +61,37 @@ module Digipolitan
     def self.deviler_init(app_identifier, apple_id)
       deliver_file_data = "app_identifier \"#{app_identifier}\" # The bundle identifier of your app\nusername \"#{apple_id}\" # Your Apple email address"
       Digipolitan::FileUtils.write_to_file("fastlane/Deliverfile", deliver_file_data)
-      age_ratings = {
-        "CARTOON_FANTASY_VIOLENCE" => 0,
-        "REALISTIC_VIOLENCE" => 0,
-        "PROLONGED_GRAPHIC_SADISTIC_REALISTIC_VIOLENCE" => 0,
-        "PROFANITY_CRUDE_HUMOR" => 0,
-        "MATURE_SUGGESTIVE" => 0,
-        "HORROR" => 0,
-        "MEDICAL_TREATMENT_INFO" => 0,
-        "ALCOHOL_TOBACCO_DRUGS" => 0,
-        "GAMBLING" => 0,
-        "SEXUAL_CONTENT_NUDITY" => 0,
-        "GRAPHIC_SEXUAL_CONTENT_NUDITY" => 0,
-        "UNRESTRICTED_WEB_ACCESS" => 0,
-        "GAMBLING_CONTESTS" => 0
-      }
-      if FastlaneCore::UI.confirm("Is your app have age rating ?")
-        ratings = ["none", "minor", "major"]
-        loop do
-          age_ratings.each { |key, value|
-            FastlaneCore::UI.message("#{key} => #{value}")
-          }
-          key = FastlaneCore::UI.input("What rating key would you like to update ?")
-          if age_ratings.key?(key)
-            value = FastlaneCore::UI.select("Choose a rating value", ratings)
-            if i = ratings.index(value)
-              age_ratings[key] = i
-            end
-          end
-          break if !FastlaneCore::UI.confirm("Would you like to update another key ?")
-        end
+      if FastlaneCore::UI.confirm("Do you want to edit your app age rating ?")
+        self.update_age_ratings()
       end
-      print age_ratings.to_json
+    end
+
+    def self.update_age_ratings()
+      age_ratings_path = "./fastlane/metadata/age_ratings.json"
+      ratings = ["none", "minor", "major"]
+      age_ratings = Digipolitan::FileUtils.parse_json_from_file(age_ratings_path)
+      loop do
+        age_ratings.each { |key, value|
+          FastlaneCore::UI.message("#{key} => #{value}")
+        }
+        key = FastlaneCore::UI.input("What age rating key would you like to update ?")
+        if age_ratings.key?(key)
+          value = FastlaneCore::UI.select("Choose a rating value", ratings)
+          if i = ratings.index(value)
+            age_ratings[key] = i
+          end
+        end
+        break if !FastlaneCore::UI.confirm("Would you like to update another key ?")
+      end
+      Digipolitan::FileUtils.serialize_json_to_file(age_ratings_path, age_ratings)
     end
 
     def self.pilot_init()
+      # TODO
     end
 
     def self.snapshot_init()
+      # TODO
     end
 
   end
