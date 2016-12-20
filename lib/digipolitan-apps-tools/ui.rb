@@ -5,9 +5,10 @@ module Digipolitan
   class UI
 
     def self.message(msg, color = nil)
-      msg = "#{msg}\n"
       if color != nil
         msg = msg.colorize(color)
+      else
+        msg = "#{msg}\n"
       end
       $stdout.puts(msg)
     end
@@ -49,7 +50,7 @@ module Digipolitan
     end
 
     def self.crash(msg)
-      abort("\n[!!!] CRASH : #{msg}\n".colorize(:red))
+      abort("\n[!!!] CRASH : #{msg}".colorize(:red))
     end
 
   end
