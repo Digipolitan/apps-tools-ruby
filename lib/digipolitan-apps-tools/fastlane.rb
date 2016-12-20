@@ -1,4 +1,4 @@
-require 'json'
+require 'fastlane'
 
 module Digipolitan
 
@@ -6,23 +6,23 @@ module Digipolitan
 
     def self.init()
       app_identifier = nil
-      if Digipolitan::UI.confirm("Would you like to update your app_identifier")
-        app_identifier = Digipolitan::UI.input("App identifier ?")
+      if FastlaneCore::UI.confirm("Would you like to update your app_identifier")
+        app_identifier = FastlaneCore::UI.input("App identifier ?")
         Digipolitan::Fastlane.update_app_identifier(app_identifier)
       end
       apple_id = nil
       team_name = nil
-      if Digipolitan::UI.confirm("Init fastlane ?")
+      if FastlaneCore::UI.confirm("Init fastlane ?")
         if app_identifier == nil
-          app_identifier = Digipolitan::UI.input("App identifier ?")
+          app_identifier = FastlaneCore::UI.input("App identifier ?")
         end
-        apple_id = Digipolitan::UI.input("Apple ID ?")
-        team_name = Digipolitan::UI.input("Team name ?")
+        apple_id = FastlaneCore::UI.input("Apple ID ?")
+        team_name = FastlaneCore::UI.input("Team name ?")
         Digipolitan::Fastlane.app_init(app_identifier, apple_id, team_name)
-        if Digipolitan::UI.confirm("Init pilot (Use for beta testing) ?")
+        if FastlaneCore::UI.confirm("Init pilot (Use for beta testing) ?")
           Digipolitan::Fastlane.pilot_init()
         end
-        if Digipolitan::UI.confirm("Init deliver (Use for appstore submission) ?")
+        if FastlaneCore::UI.confirm("Init deliver (Use for appstore submission) ?")
           Digipolitan::Fastlane.deviler_init(app_identifier, apple_id)
           Digipolitan::Fastlane.snapshot_init()
         end
@@ -40,7 +40,7 @@ module Digipolitan
       begin
         system("fastlane run update_app_identifier app_identifier:#{app_identifier} plist_path:#{plist_path}")
       rescue
-        Digipolitan::UI.error("Error during fastlane 'update_app_identifier'")
+        FastlaneCore::UI.user_error! ("Error during fastlane 'update_app_identifier'")
       end
     end
 
@@ -76,20 +76,20 @@ module Digipolitan
         "UNRESTRICTED_WEB_ACCESS" => 0,
         "GAMBLING_CONTESTS" => 0
       }
-      if Digipolitan::UI.confirm("Is your app have age rating ?")
+      if FastlaneCore::UI.confirm("Is your app have age rating ?")
         ratings = ["none", "minor", "major"]
         loop do
           age_ratings.each { |key, value|
-            Digipolitan::UI.message("#{key} => #{value}")
+            FastlaneCore::UI.message("#{key} => #{value}")
           }
-          key = Digipolitan::UI.input("What rating key would you like to update ?")
+          key = FastlaneCore::UI.input("What rating key would you like to update ?")
           if age_ratings.key?(key)
-            value = Digipolitan::UI.select("Choose a rating value", ratings)
+            value = FastlaneCore::UI.select("Choose a rating value", ratings)
             if i = ratings.index(value)
               age_ratings[key] = i
             end
           end
-          break if !Digipolitan::UI.confirm("Would you like to update another key ?")
+          break if !FastlaneCore::UI.confirm("Would you like to update another key ?")
         end
       end
       print age_ratings.to_json
@@ -100,6 +100,10 @@ module Digipolitan
 
     def self.snapshot_init()
     end
+
+    def self.run_action() {
+
+    }
 
   end
 end
