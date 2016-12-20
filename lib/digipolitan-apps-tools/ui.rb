@@ -27,14 +27,14 @@ module Digipolitan
     end
 
     def self.confirm(msg)
-      self.message("#{msg} y/n", :yellow)
+      self.message("#{msg} (y/n)", :yellow)
       while c = $stdin.getch()
         if c == "y"
           return true
         elsif c == "n"
           return false
         else
-          self.error("Select y/n only")
+          self.error("Select yes or no only")
         end
       end
     end
