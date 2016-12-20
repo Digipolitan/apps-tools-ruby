@@ -14,7 +14,7 @@ module Digipolitan
             File.rename(File.join(path, entry), replaced_path)
           end
           if recursive && File.directory?(replaced_path) && replaced != "." && replaced != ".."
-            self.rename_files(pattern, replacement, ignored_directories, replaced_path, recursive)
+            self.rename_files(pattern, replacement, ignored_entries, replaced_path, recursive)
           end
         end
       end
@@ -26,7 +26,7 @@ module Digipolitan
         file_path = File.join(path, entry)
         if file_path != __FILE__ && (ignored_entries == nil || ignored_entries.index(entry) == nil)
           if recursive && File.directory?(file_path) && entry != "." && entry != ".."
-            self.replace_contents_of_files(pattern, replacement, file_path, recursive)
+            self.replace_contents_of_files(pattern, replacement, ignored_entries, file_path, recursive)
           elsif File.file?(file_path)
             content = File.read(file_path)
             if content.include?(pattern)
