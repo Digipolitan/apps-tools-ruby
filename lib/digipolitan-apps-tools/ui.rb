@@ -18,7 +18,7 @@ module Digipolitan
     end
 
     def self.input(msg)
-      self.message(msg)
+      self.message(msg, :yellow)
       return $stdin.gets().strip()
     end
 
