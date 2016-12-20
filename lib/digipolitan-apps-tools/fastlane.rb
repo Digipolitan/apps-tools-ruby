@@ -43,41 +43,41 @@ module Digipolitan
 
     def self.deviler_init()
       if Digipolitan::UI.confirm("Use deliver ?")
-    deliver_file_data = "app_identifier \"#{app_identifier}\" # The bundle identifier of your app\nusername \"#{apple_id}\" # Your Apple email address"
-    Digipolitan::FileUtils.write_to_file("fastlane/Deliverfile", deliver_file_data)
-    age_ratings = {
-      "CARTOON_FANTASY_VIOLENCE" => 0,
-      "REALISTIC_VIOLENCE" => 0,
-      "PROLONGED_GRAPHIC_SADISTIC_REALISTIC_VIOLENCE" => 0,
-      "PROFANITY_CRUDE_HUMOR" => 0,
-      "MATURE_SUGGESTIVE" => 0,
-      "HORROR" => 0,
-      "MEDICAL_TREATMENT_INFO" => 0,
-      "ALCOHOL_TOBACCO_DRUGS" => 0,
-      "GAMBLING" => 0,
-      "SEXUAL_CONTENT_NUDITY" => 0,
-      "GRAPHIC_SEXUAL_CONTENT_NUDITY" => 0,
-      "UNRESTRICTED_WEB_ACCESS" => 0,
-      "GAMBLING_CONTESTS" => 0
-    }
-    if Digipolitan::UI.confirm("Is your app have age rating ?")
-      ratings = ["none", "minor", "major"]
-      loop do
-        age_ratings.each { |key, value|
-          Digipolitan::UI.message("#{key} => #{value}")
+        deliver_file_data = "app_identifier \"#{app_identifier}\" # The bundle identifier of your app\nusername \"#{apple_id}\" # Your Apple email address"
+        Digipolitan::FileUtils.write_to_file("fastlane/Deliverfile", deliver_file_data)
+        age_ratings = {
+          "CARTOON_FANTASY_VIOLENCE" => 0,
+          "REALISTIC_VIOLENCE" => 0,
+          "PROLONGED_GRAPHIC_SADISTIC_REALISTIC_VIOLENCE" => 0,
+          "PROFANITY_CRUDE_HUMOR" => 0,
+          "MATURE_SUGGESTIVE" => 0,
+          "HORROR" => 0,
+          "MEDICAL_TREATMENT_INFO" => 0,
+          "ALCOHOL_TOBACCO_DRUGS" => 0,
+          "GAMBLING" => 0,
+          "SEXUAL_CONTENT_NUDITY" => 0,
+          "GRAPHIC_SEXUAL_CONTENT_NUDITY" => 0,
+          "UNRESTRICTED_WEB_ACCESS" => 0,
+          "GAMBLING_CONTESTS" => 0
         }
-        key = Digipolitan::UI.input("What rating key would you like to update ?")
-        if age_ratings.key?(key)
-          value = Digipolitan::UI.select("Choose a rating value", ratings)
-          if i = ratings.index(value)
-            age_ratings[key] = i
+        if Digipolitan::UI.confirm("Is your app have age rating ?")
+          ratings = ["none", "minor", "major"]
+          loop do
+            age_ratings.each { |key, value|
+              Digipolitan::UI.message("#{key} => #{value}")
+            }
+            key = Digipolitan::UI.input("What rating key would you like to update ?")
+            if age_ratings.key?(key)
+              value = Digipolitan::UI.select("Choose a rating value", ratings)
+              if i = ratings.index(value)
+                age_ratings[key] = i
+              end
+            end
+            break if !Digipolitan::UI.confirm("Would you like to update another key ?")
           end
         end
-        break if !Digipolitan::UI.confirm("Would you like to update another key ?")
+        print age_ratings.to_json
       end
-    end
-    print age_ratings.to_json
-  end
     end
 
     def self.snapshot_init()
