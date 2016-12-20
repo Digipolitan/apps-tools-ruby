@@ -14,4 +14,5 @@ Gem::Specification.new do |s|
 Digipolitan Apps Tools is a Ruby library. This module help you building some iOS / Android app script.
 desc
   s.add_dependency("json")
+  s.add_dependency("colorize")
 end

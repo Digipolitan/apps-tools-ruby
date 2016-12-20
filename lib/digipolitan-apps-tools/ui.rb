@@ -1,9 +1,15 @@
+require 'colorize'
+
 module Digipolitan
 
   class UI
 
-    def self.message(msg)
-      $stdout.puts("#{msg}\n")
+    def self.message(msg, color = nil)
+      msg = "#{msg}\n"
+      if color != nil
+        msg = msg.colorize(color)
+      end
+      $stdout.puts(msg)
     end
 
     def self.input(msg)
@@ -12,11 +18,11 @@ module Digipolitan
     end
 
     def self.error(msg)
-      self.message("\n[!] ERROR : #{msg}")
+      self.message("\n[!] ERROR : #{msg}", :red)
     end
 
     def self.confirm(msg)
-      self.message("#{msg} y/n")
+      self.message("#{msg} y/n", :yellow)
       while c = $stdin.getch()
         if c == "y"
           return true
@@ -43,7 +49,7 @@ module Digipolitan
     end
 
     def self.crash(msg)
-      abort("\n[!!!] CRASH : #{msg}\n")
+      abort("\n[!!!] CRASH : #{msg}\n".colorize(:red))
     end
 
   end
