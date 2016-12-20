@@ -10,11 +10,12 @@ module Digipolitan
       project_name = File.basename(project, ".xcodeproj")
       app_name = Digipolitan::UI.input("Project name ?")
 
-      if Digipolitan::UI.confirm("Are you sure to update the current project to '#{app_name}' ?")
+      if Digipolitan::UI.confirm("Are you sure to replace the current project '#{project_name}' to '#{app_name}' ?")
         Digipolitan::UI.message("Starting replacement...")
-        Digipolitan::FileUtils.rename_files(project_name, app_name)
-        Digipolitan::FileUtils.replace_contents_of_files(project_name, app_name)
-        Digipolitan::UI.message("Successfully replace '#{project_name}' with '#{app_name}'")
+        ignored_entry = [".git", "DerivedData"]
+        Digipolitan::FileUtils.rename_files(project_name, app_name, ignored_entry)
+        Digipolitan::FileUtils.replace_contents_of_files(project_name, app_name, ignored_entry)
+        Digipolitan::UI.message("Successfully replaced '#{project_name}' with '#{app_name}'")
       end
     end
 
@@ -30,6 +31,6 @@ module Digipolitan
         return File.join(File.basename(project, ".xcodeproj"), plist_name)
       end
     end
-    
+
   end
 end

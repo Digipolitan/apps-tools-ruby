@@ -2,29 +2,29 @@ module Digipolitan
 
   class FileUtils
 
-    def self.rename_files(pattern, replacement, path = ".", recursive = true)
+    def self.rename_files(pattern, replacement, ignored_entry = [], path = ".", recursive = true)
       entries = Dir.entries(path)
       entries.each do |entry|
         replaced = entry
         replaced_path = File.join(path, entry)
-        if replaced_path != __FILE__
+        if replaced_path != __FILE__ && ignored_entry[entry] == nil
           if entry.include?(pattern)
             replaced = entry.gsub(pattern, replacement)
             replaced_path = File.join(path, replaced)
             File.rename(File.join(path, entry), replaced_path)
           end
           if recursive && File.directory?(replaced_path) && replaced != "." && replaced != ".."
-            self.rename_files(pattern, replacement, replaced_path, recursive)
+            self.rename_files(pattern, replacement, ignored_directories, replaced_path, recursive)
           end
         end
       end
     end
 
-    def self.replace_contents_of_files(pattern, replacement, path = ".", recursive = true)
+    def self.replace_contents_of_files(pattern, replacement, ignored_entry = [], path = ".", recursive = true)
       entries = Dir.entries(path)
       entries.each do |entry|
         file_path = File.join(path, entry)
-        if file_path != __FILE__
+        if file_path != __FILE__ && ignored_entry[entry] == nil
           if recursive && File.directory?(file_path) && entry != "." && entry != ".."
             self.replace_contents_of_files(pattern, replacement, file_path, recursive)
           elsif File.file?(file_path)
