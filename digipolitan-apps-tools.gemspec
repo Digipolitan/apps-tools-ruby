@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name                  = 'digipolitan-apps-tools'
-  s.version               = '0.0.1'
-  s.date                  = '2016-12-19'
+  s.version               = '0.1.0'
+  s.date                  = '2016-12-22'
   s.summary               = 'Digipolitan Ruby tools for apps'
   s.homepage              = 'https://github.com/Digipolitan/apps-tools'
   s.email                 = 'contact@digipolitan.com'
@@ -14,5 +14,4 @@ Gem::Specification.new do |s|
 Digipolitan Apps Tools is a Ruby library. This module help you building some iOS / Android app script.
 desc
 s.add_dependency("colorize")
-s.add_dependency("json")
 end

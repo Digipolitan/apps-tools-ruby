@@ -3,7 +3,7 @@ module Digipolitan
 
   class Xcodeproj
 
-    def self.rename_project(project = nil, plist_path = nil)
+    def self.rename_project(project = nil)
       if project == nil
         project = self.get_project()
       end
@@ -18,6 +18,10 @@ module Digipolitan
         Digipolitan::FileUtils.replace_contents_of_files(project_name, app_name, ignored_entries)
         Digipolitan::UI.success("Successfully replaced '#{project_name}' with '#{app_name}'")
       end
+    end
+
+    def self.get_project()
+      return Dir['*.xcodeproj'].first
     end
   end
 end
