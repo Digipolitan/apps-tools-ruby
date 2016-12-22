@@ -19,19 +19,5 @@ module Digipolitan
         Digipolitan::UI.success("Successfully replaced '#{project_name}' with '#{app_name}'")
       end
     end
-
-    def self.get_project()
-      return Dir['*.xcodeproj'].first
-    end
-
-    def self.get_info_plist(project)
-      plist_name = "Info.plist"
-      if File.exists?(plist_name)
-        return plist_name
-      else
-        return File.join(File.basename(project, ".xcodeproj"), plist_name)
-      end
-    end
-
   end
 end
