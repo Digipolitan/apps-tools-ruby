@@ -52,7 +52,7 @@ module Digipolitan
             end
           end
           Dir.delete(path)
-      elsif File.exists?(path)
+      elsif File.exist?(path)
         File.delete(path)
       end
     end
@@ -70,7 +70,7 @@ module Digipolitan
           f_path = File.join(f_path != nil ? f_path : "", f_name)
         end
         if f_name.length != 0
-          if !Dir.exists?(f_path)
+          if !Dir.exist?(f_path)
             Dir.mkdir(f_path)
           end
         end

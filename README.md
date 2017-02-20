@@ -98,7 +98,21 @@ Sample action used to write data, write *Hello world* in `./test/bonjour.md`
 ````Ruby
 Digipolitan::FileUtils.remove_dir("./dev")
 ````
-Remove the given directory
+Removes the given directory
+
+````Ruby
+Digipolitan::FileUtils.mkdir_p("a/b/c/d")
+````
+Creates a directory and all its parent directories
+
+causes to make following directories, if it does not exist.
+
+````Sh
+mkdir a
+mkdir a/b
+mkdir a/b/c
+mkdir a/b/c/d
+````
 
 ## iOS tools
 
