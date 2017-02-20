@@ -47,6 +47,22 @@ level = Digipolitan::UI.select("Choose your level ?", ["easy", "medium", "hard",
 ````
 Print *Choose your level ?* in stdout and wait the user to select the level : 1 -> easy, 2 -> medium, etc..
 
+### Argv
+
+The Argv class provides a parser to read inputs from command line and wrap it into a map using these rules :
+`script.rb -key1 value1 -key2 value2 value3 --key3`
+This command will generate the following result :
+````Json
+{
+  "-key1": "value1",
+  "-key2": [
+    "value2",
+    "value3"
+  ],
+  "--key3": true
+}
+````
+
 ### FileUtils
 
 The FileUtils class provides some tools to work easy with files, such as rename all files from a directory, replace all matching contents in files
