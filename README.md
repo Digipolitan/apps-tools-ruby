@@ -1,5 +1,7 @@
 # apps-tools
 
+[![Gem Version](https://badge.fury.io/rb/digipolitan-apps-tools.svg)](http://badge.fury.io/rb/digipolitan-apps-tools)
+
 Digipolitan tools for Ruby scripts
 
 ## Cross-platform tools
