@@ -47,6 +47,33 @@ level = Digipolitan::UI.select("Choose your level ?", ["easy", "medium", "hard",
 ````
 Print *Choose your level ?* in stdout and wait the user to select the level : 1 -> easy, 2 -> medium, etc..
 
+### Argv
+
+The Argv class provides a parser to read inputs from command line and wrap it into a map using these rules :
+````Sh
+`script.rb -key1 value1 -key2 value2 value3 --key3`
+````
+
+This command will generate the following result :
+
+````Json
+{
+  "-key1": "value1",
+  "-key2": [
+    "value2",
+    "value3"
+  ],
+  "--key3": true
+}
+````
+
+Example with `script.rb -key hello` :
+
+````Ruby
+args = Digipolitan::Argv.parse()
+print args["-key"] # display 'hello'
+````
+
 ### FileUtils
 
 The FileUtils class provides some tools to work easy with files, such as rename all files from a directory, replace all matching contents in files
@@ -67,6 +94,25 @@ This action replace all *bonjour* content with *hello* inside all files from the
 Digipolitan::FileUtils.write_to_file("./test/bonjour.md", "Hello world")
 ````
 Sample action used to write data, write *Hello world* in `./test/bonjour.md`
+
+````Ruby
+Digipolitan::FileUtils.remove_dir("./dev")
+````
+Removes the given directory
+
+````Ruby
+Digipolitan::FileUtils.mkdir_p("a/b/c/d")
+````
+Creates a directory and all its parent directories
+
+causes to make following directories, if it does not exist.
+
+````Sh
+mkdir a
+mkdir a/b
+mkdir a/b/c
+mkdir a/b/c/d
+````
 
 ## iOS tools
 

@@ -42,5 +42,40 @@ module Digipolitan
         file.puts(content)
       }
     end
+
+    def self.remove_dir(path)
+      if File.directory?(path)
+          entries = Dir.entries(path)
+          entries.each do |entry|
+            if entry != "." && entry != ".."
+              self.remove_dir(File.join(path, entry))
+            end
+          end
+          Dir.delete(path)
+      elsif File.exist?(path)
+        File.delete(path)
+      end
+    end
+
+    def self.mkdir_p(path)
+      arr = path.split(File::SEPARATOR)
+      count = arr.count
+      i = 0
+      f_path = nil
+      while i < count
+        f_name = arr[i]
+        if f_path == nil && f_name.length != 0
+          f_path = f_name
+        else
+          f_path = File.join(f_path != nil ? f_path : "", f_name)
+        end
+        if f_name.length != 0
+          if !Dir.exist?(f_path)
+            Dir.mkdir(f_path)
+          end
+        end
+        i += 1
+      end
+    end
   end
 end
