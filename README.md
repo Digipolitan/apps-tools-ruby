@@ -50,8 +50,12 @@ Print *Choose your level ?* in stdout and wait the user to select the level : 1 
 ### Argv
 
 The Argv class provides a parser to read inputs from command line and wrap it into a map using these rules :
+````Sh
 `script.rb -key1 value1 -key2 value2 value3 --key3`
+````
+
 This command will generate the following result :
+
 ````Json
 {
   "-key1": "value1",
@@ -61,6 +65,13 @@ This command will generate the following result :
   ],
   "--key3": true
 }
+````
+
+Example with `script.rb -key hello` :
+
+````Ruby
+args = Digipolitan::Argv.parse()
+print args["-key"] # display 'hello'
 ````
 
 ### FileUtils
