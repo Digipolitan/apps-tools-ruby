@@ -95,6 +95,11 @@ Digipolitan::FileUtils.write_to_file("./test/bonjour.md", "Hello world")
 ````
 Sample action used to write data, write *Hello world* in `./test/bonjour.md`
 
+````Ruby
+Digipolitan::FileUtils.remove_dir("./dev")
+````
+Remove the given directory
+
 ## iOS tools
 
 ### Xcodeproj
