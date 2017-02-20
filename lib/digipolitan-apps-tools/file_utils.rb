@@ -52,7 +52,7 @@ module Digipolitan
             end
           end
           Dir.delete(path)
-      else
+      elsif File.exists?(path)
         File.delete(path)
       end
     end
