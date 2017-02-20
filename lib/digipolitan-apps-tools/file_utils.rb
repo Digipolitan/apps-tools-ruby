@@ -47,7 +47,7 @@ module Digipolitan
       if File.directory?(path)
           entries = Dir.entries(path)
           entries.each do |entry|
-            if entry != "." && entry != "..")
+            if entry != "." && entry != ".."
               self.remove_dir(File.join(path, entry))
             end
           end
