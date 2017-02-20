@@ -56,5 +56,26 @@ module Digipolitan
         File.delete(path)
       end
     end
+
+    def self.mkdir_p(path)
+      arr = path.split(File::SEPARATOR)
+      count = arr.count
+      i = 0
+      f_path = nil
+      while i < count
+        f_name = arr[i]
+        if f_path == nil && f_name.length != 0
+          f_path = f_name
+        else
+          f_path = File.join(f_path != nil ? f_path : "", f_name)
+        end
+        if f_name.length != 0
+          if !Dir.exists?(f_path)
+            Dir.mkdir(f_path)
+          end
+        end
+        i += 1
+      end
+    end
   end
 end
