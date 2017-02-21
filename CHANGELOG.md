@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.2.1](https://github.com/Digipolitan/apps-tools/releases/tag/v0.2.1)
+
+add require io/console
+
+---
+
 ## [0.2.0](https://github.com/Digipolitan/apps-tools/releases/tag/v0.2.0)
 
 add Argv class, this class help the developer to parse command line args
