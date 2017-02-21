@@ -1,4 +1,5 @@
 require 'colorize'
+require 'io/console'
 
 module Digipolitan
 
