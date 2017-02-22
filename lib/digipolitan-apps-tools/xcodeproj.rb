@@ -16,6 +16,9 @@ module Digipolitan
         ignored_entries = [".git", "DerivedData"]
         Digipolitan::FileUtils.rename_files(project_name, app_name, ignored_entries)
         Digipolitan::FileUtils.replace_contents_of_files(project_name, app_name, ignored_entries)
+
+        Digipolitan::FileUtils.replace_contents_of_files(self.build_define(project_name), self.build_define(app_name), ignored_entries)
+
         Digipolitan::UI.success("Successfully replaced '#{project_name}' with '#{app_name}'")
       end
     end
@@ -23,5 +26,14 @@ module Digipolitan
     def self.get_project()
       return Dir['*.xcodeproj'].first
     end
+
+    def self.build_define(project_name)
+      res = project_name.upcase
+      res = res.gsub(" ", "_")
+      return "_#{res}_H"
+    end
+
+    # Visibility
+    private_class_method :build_define
   end
 end
