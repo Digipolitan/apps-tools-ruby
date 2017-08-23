@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name                  = 'digipolitan-apps-tools'
   s.version               = '0.2.2'
-  s.date                  = '2017-02-21'
+  s.date                  = '2017-08-23'
   s.summary               = 'Digipolitan Ruby tools for apps'
   s.homepage              = 'https://github.com/Digipolitan/apps-tools-ruby'
   s.email                 = 'contact@digipolitan.com'
