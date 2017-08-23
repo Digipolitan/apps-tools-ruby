@@ -20,7 +20,11 @@ module Digipolitan
 
     def self.input(msg)
       self.message(msg, :yellow)
-      return $stdin.gets().strip()
+      return $stdin.gets.strip
+    end
+
+    def self.warning(msg)
+      self.message("\n[!] WARNING : #{msg}", :yellow)
     end
 
     def self.error(msg)
@@ -29,13 +33,13 @@ module Digipolitan
 
     def self.confirm(msg)
       self.message("#{msg} (y/n)", :yellow)
-      while c = $stdin.getch()
+      while (c = $stdin.getch)
         if c == "y"
           return true
         elsif c == "n"
           return false
         else
-          self.error("Select yes or no only")
+          self.error('Select yes or no only')
         end
       end
     end
@@ -47,7 +51,7 @@ module Digipolitan
         i += 1
         self.message("#{i} - #{value}")
       }
-      while val = self.input("Select a value between [1 - #{i}]").to_i
+      while (val = self.input("Select a value between [1 - #{i}]").to_i)
         if val >= 1 && val <= i
           return values[val-1]
         end

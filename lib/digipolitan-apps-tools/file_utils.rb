@@ -2,7 +2,7 @@ module Digipolitan
 
   class FileUtils
 
-    def self.rename_files(pattern, replacement, ignored_entries = nil, path = ".", recursive = true)
+    def self.rename_files(pattern, replacement, ignored_entries = nil, path = '.', recursive = true)
       entries = Dir.entries(path)
       entries.each do |entry|
         replaced = entry
@@ -13,19 +13,19 @@ module Digipolitan
             replaced_path = File.join(path, replaced)
             File.rename(File.join(path, entry), replaced_path)
           end
-          if recursive && File.directory?(replaced_path) && replaced != "." && replaced != ".."
+          if recursive && File.directory?(replaced_path) && replaced != '.' && replaced != '..'
             self.rename_files(pattern, replacement, ignored_entries, replaced_path, recursive)
           end
         end
       end
     end
 
-    def self.replace_contents_of_files(pattern, replacement, ignored_entries = nil, path = ".", recursive = true)
+    def self.replace_contents_of_files(pattern, replacement, ignored_entries = nil, path = '.', recursive = true)
       entries = Dir.entries(path)
       entries.each do |entry|
         file_path = File.join(path, entry)
         if file_path != __FILE__ && (ignored_entries == nil || ignored_entries.index(entry) == nil)
-          if recursive && File.directory?(file_path) && entry != "." && entry != ".."
+          if recursive && File.directory?(file_path) && entry != '.' && entry != '..'
             self.replace_contents_of_files(pattern, replacement, ignored_entries, file_path, recursive)
           elsif File.file?(file_path)
             content = File.read(file_path)
@@ -33,7 +33,7 @@ module Digipolitan
               begin
                 self.write_to_file(file_path, content.gsub(pattern, replacement))
               rescue
-                Digipolitan::UI.error("Error during replacement of file at path #{file_path}")
+                Digipolitan::UI.warning("Error during replacement of file at path #{file_path}")
               end
             end
           end
@@ -41,8 +41,8 @@ module Digipolitan
       end
     end
 
-    def self.write_to_file(path, content = "")
-      File.open(path, "w") { |file|
+    def self.write_to_file(path, content = '')
+      File.open(path, 'w') { |file|
         file.puts(content)
       }
     end
@@ -51,7 +51,7 @@ module Digipolitan
       if File.directory?(path)
           entries = Dir.entries(path)
           entries.each do |entry|
-            if entry != "." && entry != ".."
+            if entry != '.' && entry != '..'
               self.remove_dir(File.join(path, entry))
             end
           end
@@ -71,7 +71,7 @@ module Digipolitan
         if f_path == nil && f_name.length != 0
           f_path = f_name
         else
-          f_path = File.join(f_path != nil ? f_path : "", f_name)
+          f_path = File.join(f_path != nil ? f_path : '', f_name)
         end
         if f_name.length != 0
           if !Dir.exist?(f_path)
