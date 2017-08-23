@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name                  = 'digipolitan-apps-tools'
-  s.version               = '0.2.1'
+  s.version               = '0.2.2'
   s.date                  = '2017-02-21'
   s.summary               = 'Digipolitan Ruby tools for apps'
-  s.homepage              = 'https://github.com/Digipolitan/apps-tools'
+  s.homepage              = 'https://github.com/Digipolitan/apps-tools-ruby'
   s.email                 = 'contact@digipolitan.com'
   s.authors               = ['bbriatte', 'vbalasubramaniam']
   s.license               = 'BSD-3-Clause'

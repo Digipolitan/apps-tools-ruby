@@ -30,7 +30,11 @@ module Digipolitan
           elsif File.file?(file_path)
             content = File.read(file_path)
             if content.include?(pattern)
-              self.write_to_file(file_path, content.gsub(pattern, replacement))
+              begin
+                self.write_to_file(file_path, content.gsub(pattern, replacement))
+              rescue
+                Digipolitan::UI.error("Error during replacement of file at path #{file_path}")
+              end
             end
           end
         end

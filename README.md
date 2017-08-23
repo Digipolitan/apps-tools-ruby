@@ -1,4 +1,4 @@
-# apps-tools
+# apps-tools-ruby
 
 [![Gem Version](https://badge.fury.io/rb/digipolitan-apps-tools.svg)](http://badge.fury.io/rb/digipolitan-apps-tools)
 

@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.2.2](https://github.com/Digipolitan/apps-tools/releases/tag/v0.2.2)
+
+Renaming define in project and catch error during replacing content of files
+
+---
+
 ## [0.2.1](https://github.com/Digipolitan/apps-tools/releases/tag/v0.2.1)
 
 add require io/console
